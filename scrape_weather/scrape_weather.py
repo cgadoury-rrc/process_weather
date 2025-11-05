@@ -16,21 +16,22 @@ class WeatherScraper(HTMLParser):
         self._visited = set()
         self._column_index = 0
         self._base_url = "https://climate.weather.gc.ca"
-        self._year = None
-        self._month = None
+        self._current_date = datetime.date.today()
+        self._year = self._current_date.year
+        self._month = self._current_date.month
         self._current_tag = None
         self._selected_field = None
         self._previous_month_url = None
 
     def scrape_all(self):
         """ The main scraping method"""
+        url = input("Enter a Url to scrape weather data: ")
+
         print("Beginning weather scrape...")
 
         progress_bar = tqdm(desc="Scraping months", unit=" month")
-        url = ('https://climate.weather.gc.ca/climate_data/daily_data_e.html' +
-            '?StationID=27174&timeframe=2&StartYear=1840&EndYear=2018&Day=1&Year=2018&Month=5')
 
-        while url not in self._visited:
+        while url not in self._visited and self._year >= 2020:
             self._visited.add(url)
 
             html = self.get_html(url)
