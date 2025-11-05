@@ -1,1 +1,19 @@
-__pycache__
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+
+# SQLite database
+*.sqlite
+
+# VS Code settings
+.vscode/
+
+# Virtual environments
+venv/
+.env
+*.env
+
+# Logs and misc
+*.log
+.DS_Store

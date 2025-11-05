@@ -31,7 +31,7 @@ class WeatherScraper(HTMLParser):
 
         progress_bar = tqdm(desc="Scraping months", unit=" month")
 
-        while url not in self._visited and self._year >= 2020:
+        while url not in self._visited and self._year >= 2024:
             self._visited.add(url)
 
             html = self.get_html(url)
