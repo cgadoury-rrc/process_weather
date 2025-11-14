@@ -1,4 +1,5 @@
 """ Module Imports. """
+from plot_operations.plot_operations import PlotOperations
 from scrape_weather.scrape_weather import WeatherScraper
 from db_operations.db_operations import DbOperations
 from db_context.dcbm import DBCM
@@ -14,7 +15,9 @@ def main():
         db = DbOperations(cur, weather_data)
         db.purge_data()
         db.save_data()
-        print(db.fetch_data())
+        plot_ops = PlotOperations(db.fetch_data())
+        plot_ops.generate_line_plot(2025, 10)
+
 
 if __name__ == "__main__":
     main()
