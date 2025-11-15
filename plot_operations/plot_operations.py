@@ -1,4 +1,5 @@
 """ Module Imports. """
+import logging
 from datetime import datetime
 import matplotlib.pyplot as plt
 
@@ -25,7 +26,7 @@ class PlotOperations():
                     plot_data.setdefault(month,[]).append(temp)
 
             except ValueError as e:
-                print(f"Warning: Skipping invalid row: {row} - {e}")
+                logging.warning("Warning: Skipping invalid row: %s - %s", row, e)
 
         return plot_data
 
@@ -44,7 +45,7 @@ class PlotOperations():
                     date_temps[date_string] = temp
 
             except ValueError as e:
-                print(f"Warning: Skipping invalid row: {row} - {e}")
+                logging.warning("Warning: Skipping invalid row: %s - %s", row, e)
 
         return dict(
             sorted(date_temps.items(), key=lambda item: datetime.strptime(item[0], "%Y-%m-%d"))
