@@ -2,7 +2,7 @@
 import sys
 from datetime import datetime
 from menu import Menu
-from db_context.dcbm import DBCM
+from db_context.dbcm import DBCM
 from db_operations.db_operations import DbOperations
 from scrape_weather.scrape_weather import WeatherScraper
 from plot_operations.plot_operations import PlotOperations
