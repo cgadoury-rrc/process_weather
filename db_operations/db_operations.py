@@ -51,5 +51,4 @@ class DbOperations:
         sql = """
               delete from weather
               """
-
         self._cur.execute(sql)
