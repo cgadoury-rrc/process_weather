@@ -1,5 +1,6 @@
 """ Module Imports. """
 import sys
+from pathlib import Path
 from datetime import datetime
 from menu import Menu
 from db_context.dbcm import DBCM
@@ -17,7 +18,10 @@ class WeatherProcessor:
         self._choice = None
         self._year_range = None
         self._weather_scraper = WeatherScraper()
-        self._db_name = "weather.sqlite"
+
+        documents_folder = Path.home() / "Documents" / "WeatherProcessor"
+        documents_folder.mkdir(parents=True, exist_ok=True)
+        self._db_name = documents_folder / "weather.sqlite"
 
         self.create_start_menu()
         self._main_menu.open()
