@@ -2,7 +2,10 @@
 from weather_processor.weather_processor import WeatherProcessor
 
 def main():
-    """ The main method. """
+    """ 
+    The main method. 
+    Author: Colton Gadoury
+    """
     WeatherProcessor()
 
 if __name__ == "__main__":

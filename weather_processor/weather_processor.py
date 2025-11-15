@@ -8,7 +8,10 @@ from scrape_weather.scrape_weather import WeatherScraper
 from plot_operations.plot_operations import PlotOperations
 
 class WeatherProcessor:
-    """ A gui class to process weather data. """
+    """ 
+    A gui class to process weather data. 
+    Author: Colton Gadoury
+    """
     def __init__(self):
         """ Initializes a new instance of Weather Processor.  """
         self._choice = None

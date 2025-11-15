@@ -5,7 +5,10 @@ import urllib.request
 from html.parser import HTMLParser
 
 class WeatherScraper(HTMLParser):
-    """ A class to scrape Winnipeg weather data from environment Canada. """
+    """ 
+    A class to scrape Winnipeg weather data from environment Canada. 
+    Author: Colton Gadoury
+    """
     def __init__(self):
         """ Initializes a new instance of WeatherScraper. """
         super().__init__()

@@ -3,7 +3,10 @@ from datetime import datetime
 import matplotlib.pyplot as plt
 
 class PlotOperations():
-    """ A class to plot weather data. """
+    """ 
+    A class to plot weather data. 
+    Author: Colton Gadoury
+    """
     def __init__(self, weather_data):
         """ Initializes a new instance of Plot Operations. """
         self._weather_data = weather_data

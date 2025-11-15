@@ -2,7 +2,10 @@
 from sqlite3 import Cursor
 
 class DbOperations:
-    """ A class to handle db operations. """
+    """ 
+    A class to handle db operations. 
+    Author: Colton Gadoury
+    """
     def __init__(self, cursor: Cursor):
         """ Initializes a new instance of DbOperations. """
         self._cur = cursor

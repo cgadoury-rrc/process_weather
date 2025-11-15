@@ -2,7 +2,10 @@
 import sqlite3
 
 class DBCM():
-    """ A database context manager class. """
+    """ 
+    A database context manager class. 
+    Author: Colton Gadoury
+    """
     def __init__(self, db_name):
         """ Initializes a new instance of DBCM. """
         self._db_name = db_name
