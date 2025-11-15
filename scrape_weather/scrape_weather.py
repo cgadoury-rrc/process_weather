@@ -3,11 +3,9 @@ import calendar
 import datetime
 import urllib.request
 from html.parser import HTMLParser
-from tqdm import tqdm
 
 class WeatherScraper(HTMLParser):
     """ A class to scrape Winnipeg weather data from environment Canada. """
-
     def __init__(self):
         """ Initializes a new instance of WeatherScraper. """
         super().__init__()
@@ -25,11 +23,11 @@ class WeatherScraper(HTMLParser):
 
     def scrape_all(self):
         """ The main scraping method"""
-        url = input("Enter a Url to scrape weather data: ")
+        url = self._base_url + ("/climate_data/daily_data_e.html?StationID=27174&timeframe=2" +
+                                f"&StartYear=1840&EndYear={self._current_date.year}&Day=1" + 
+                                f"&Year={self._current_date.year}&Month={self._current_date.month}")
 
-        print("Beginning weather scrape...")
-
-        progress_bar = tqdm(desc="Scraping months", unit=" month")
+        print("Downloading weather data...")
 
         while url not in self._visited and self._year >= 2021:
             self._visited.add(url)
@@ -37,14 +35,9 @@ class WeatherScraper(HTMLParser):
             html = self.get_html(url)
             self.feed(html)
 
-            progress_bar.update(1)
-
             url = self.get_previous_page_url()
 
-        progress_bar.close()
-
-        print("Scrape complete!")
-
+        print("Download complete!")
 
     def handle_starttag(self, tag, attrs):
         """ Handle the start tag. """
@@ -70,7 +63,6 @@ class WeatherScraper(HTMLParser):
                 else:
                     self._month = int(attrs[0][1])
 
-
     def handle_endtag(self, tag):
         """ Handles the end of a tag. """
         daily_temps = {}
@@ -91,7 +83,6 @@ class WeatherScraper(HTMLParser):
             self._column_index = 0
             self._row_values = []
             self._current_tag = None
-
 
     def handle_data(self, data):
         """ Handle data returned from the response. """

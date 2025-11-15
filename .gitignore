@@ -5,6 +5,7 @@ __pycache__/
 
 # SQLite database
 *.sqlite
+*.sqlite-journal
 
 # VS Code settings
 .vscode/

@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 class PlotOperations():
     """ A class to plot weather data. """
     def __init__(self, weather_data):
+        """ Initializes a new instance of Plot Operations. """
         self._weather_data = weather_data
 
     def generate_box_plot(self, start_year: int, end_year: int) -> None:
@@ -23,15 +24,7 @@ class PlotOperations():
             except ValueError as e:
                 print(f"Warning: Skipping invalid row: {row} - {e}")
 
-        months = sorted(plot_data.keys())
-        temps_by_month = [plot_data[month] for month in months]
-
-        plt.boxplot(temps_by_month, labels=months)
-        plt.xlabel('Month')
-        plt.ylabel('Temperature (C)')
-        plt.title('Monthly temperature distribution for: ')
-
-        plt.show()
+        return plot_data
 
     def generate_line_plot(self, start_year: int, start_month: int) -> None:
         """ Prepare weather data for line plotting. """
@@ -50,11 +43,28 @@ class PlotOperations():
             except ValueError as e:
                 print(f"Warning: Skipping invalid row: {row} - {e}")
 
-        date_temps = dict(
+        return dict(
             sorted(date_temps.items(), key=lambda item: datetime.strptime(item[0], "%Y-%m-%d"))
             )
 
-        plt.plot(date_temps.keys(), date_temps.values())
+    def show_box_plot(self, start_year: int, end_year: int):
+        """ Generate and show the box plot to the user. """
+        plot_data: dict = self.generate_box_plot(start_year=start_year, end_year=end_year)
+        months = sorted(plot_data.keys())
+        temps_by_month = [plot_data[month] for month in months]
+
+        plt.boxplot(temps_by_month, labels=months)
+        plt.xlabel("Month")
+        plt.ylabel("Temperature (C)")
+        plt.title(f"Monthly temperature distribution for: {start_year} - {end_year}")
+
+        plt.show()
+
+    def show_line_plot(self, start_year: int, start_month: int):
+        """ Generate and show the line plot to the user. """
+        plot_data: dict = self.generate_line_plot(start_year=start_year, start_month=start_month)
+
+        plt.plot(plot_data.keys(), plot_data.values())
         plt.xlabel('Day of Month')
         plt.ylabel('Avg Daily Temp')
         plt.title('Daily Avg Temperatures')

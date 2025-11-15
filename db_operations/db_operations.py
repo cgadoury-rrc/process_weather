@@ -3,9 +3,9 @@ from sqlite3 import Cursor
 
 class DbOperations:
     """ A class to handle db operations. """
-    def __init__(self, cursor: Cursor, weather_data: dict[str: dict]):
+    def __init__(self, cursor: Cursor):
+        """ Initializes a new instance of DbOperations. """
         self._cur = cursor
-        self._weather_data = weather_data
         self.rows = []
         self.initialize_db()
 
@@ -19,9 +19,9 @@ class DbOperations:
 
         return self._cur.execute(sql).fetchall()
 
-    def save_data(self):
+    def save_data(self, weather_data: dict):
         """ Saves new data to the db. """
-        for sample_date, temps in self._weather_data.items():
+        for sample_date, temps in weather_data.items():
             sql = """
                   insert or ignore into weather (sample_date, location, min_temp, max_temp, avg_temp)
                   values (?, ?, ?, ?, ?)
@@ -44,10 +44,7 @@ class DbOperations:
                 unique(sample_date, location)
                 )
               """
-
         self._cur.execute(sql)
-
-        print("Table created successfully.")
 
     def purge_data(self):
         """ Deletes data from the database. """
