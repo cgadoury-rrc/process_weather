@@ -32,13 +32,15 @@ class WeatherScraper(HTMLParser):
 
         print("Downloading weather data...")
 
-        while url not in self._visited and self._year >= 2021:
-            self._visited.add(url)
-
+        while url not in self._visited:
             html = self.get_html(url)
             self.feed(html)
 
+            self._visited.add(url)
             url = self.get_previous_page_url()
+
+            if "2019" in url:
+                break
 
         print("Download complete!")
 
